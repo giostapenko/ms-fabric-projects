@@ -1,0 +1,1535 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "ParquetSource",
+            "storeSettings": {
+              "type": "AzureBlobStorageReadSettings",
+              "recursive": true,
+              "wildcardFolderPath": "WideWorldImportersDW/parquet/full/dimension_customer",
+              "wildcardFileName": "*.parquet"
+            },
+            "formatSettings": {
+              "type": "ParquetReadSettings"
+            },
+            "datasetSettings": {
+              "type": "Parquet",
+              "typeProperties": {
+                "location": {
+                  "type": "AzureBlobStorageLocation",
+                  "container": "sampledata"
+                },
+                "compressionCodec": "snappy"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "AzureBlobStorage",
+                  "typeProperties": {
+                    "authenticationType": "Anonymous",
+                    "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
+                  }
+                },
+                "name": "dimension_customer"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "sample",
+                "table": "dimension_customer"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "9db563d7-09c6-4ff5-8086-0ed117bdc02b",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                },
+                "name": "LH_Bronze"
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "CustomerKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "CustomerKey",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "WWICustomerID",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "WWICustomerID",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "Customer",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Customer",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "BillToCustomer",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "BillToCustomer",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Category",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Category",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "BuyingGroup",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "BuyingGroup",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "PrimaryContact",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "PrimaryContact",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "PostalCode",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "PostalCode",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "ValidFrom",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "ValidFrom",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "ValidTo",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "ValidTo",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "LineageKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "LineageKey",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy_vu2",
+        "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "ParquetSource",
+            "storeSettings": {
+              "type": "AzureBlobStorageReadSettings",
+              "recursive": true,
+              "wildcardFolderPath": "WideWorldImportersDW/parquet/full/dimension_city",
+              "wildcardFileName": "*.parquet"
+            },
+            "formatSettings": {
+              "type": "ParquetReadSettings"
+            },
+            "datasetSettings": {
+              "type": "Parquet",
+              "typeProperties": {
+                "location": {
+                  "type": "AzureBlobStorageLocation",
+                  "container": "sampledata"
+                },
+                "compressionCodec": "snappy"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "AzureBlobStorage",
+                  "typeProperties": {
+                    "authenticationType": "Anonymous",
+                    "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
+                  }
+                },
+                "name": "dimension_city"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "sample",
+                "table": "dimension_city"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "9db563d7-09c6-4ff5-8086-0ed117bdc02b",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                },
+                "name": "LH_Bronze"
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "CityKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "CityKey",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "WWICityID",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "WWICityID",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "City",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "City",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "StateProvince",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "StateProvince",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Country",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Country",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Continent",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Continent",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "SalesTerritory",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "SalesTerritory",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Region",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Region",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Subregion",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Subregion",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Location",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Location",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "LatestRecordedPopulation",
+                  "type": "Int64",
+                  "physicalType": "INT64"
+                },
+                "sink": {
+                  "name": "LatestRecordedPopulation",
+                  "physicalType": "long"
+                }
+              },
+              {
+                "source": {
+                  "name": "ValidFrom",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "ValidFrom",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "ValidTo",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "ValidTo",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "LineageKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "LineageKey",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy_rmj",
+        "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "ParquetSource",
+            "storeSettings": {
+              "type": "AzureBlobStorageReadSettings",
+              "recursive": true,
+              "wildcardFolderPath": "WideWorldImportersDW/parquet/full/dimension_date",
+              "wildcardFileName": "*.parquet"
+            },
+            "formatSettings": {
+              "type": "ParquetReadSettings"
+            },
+            "datasetSettings": {
+              "type": "Parquet",
+              "typeProperties": {
+                "location": {
+                  "type": "AzureBlobStorageLocation",
+                  "container": "sampledata"
+                },
+                "compressionCodec": "snappy"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "AzureBlobStorage",
+                  "typeProperties": {
+                    "authenticationType": "Anonymous",
+                    "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
+                  }
+                },
+                "name": "dimension_date"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "sample",
+                "table": "dimension_date"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "9db563d7-09c6-4ff5-8086-0ed117bdc02b",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                },
+                "name": "LH_Bronze"
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "Date",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "Date",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "DayNumber",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "DayNumber",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "Day",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Day",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Month",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Month",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "ShortMonth",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "ShortMonth",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "CalendarMonthNumber",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "CalendarMonthNumber",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "CalendarMonthLabel",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "CalendarMonthLabel",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "CalendarYear",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "CalendarYear",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "CalendarYearLabel",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "CalendarYearLabel",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "FiscalMonthNumber",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "FiscalMonthNumber",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "FiscalMonthLabel",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "FiscalMonthLabel",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "FiscalYear",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "FiscalYear",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "FiscalYearLabel",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "FiscalYearLabel",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "ISOWeekNumber",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "ISOWeekNumber",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy_4lx",
+        "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "ParquetSource",
+            "storeSettings": {
+              "type": "AzureBlobStorageReadSettings",
+              "recursive": true,
+              "wildcardFolderPath": "WideWorldImportersDW/parquet/full/dimension_employee",
+              "wildcardFileName": "*.parquet"
+            },
+            "formatSettings": {
+              "type": "ParquetReadSettings"
+            },
+            "datasetSettings": {
+              "type": "Parquet",
+              "typeProperties": {
+                "location": {
+                  "type": "AzureBlobStorageLocation",
+                  "container": "sampledata"
+                },
+                "compressionCodec": "snappy"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "AzureBlobStorage",
+                  "typeProperties": {
+                    "authenticationType": "Anonymous",
+                    "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
+                  }
+                },
+                "name": "dimension_employee"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "sample",
+                "table": "dimension_employee"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "9db563d7-09c6-4ff5-8086-0ed117bdc02b",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                },
+                "name": "LH_Bronze"
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "EmployeeKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "EmployeeKey",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "WWIEmployeeID",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "WWIEmployeeID",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "Employee",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Employee",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "PreferredName",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "PreferredName",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "IsSalesperson",
+                  "type": "Boolean",
+                  "physicalType": "BOOLEAN"
+                },
+                "sink": {
+                  "name": "IsSalesperson",
+                  "physicalType": "boolean"
+                }
+              },
+              {
+                "source": {
+                  "name": "Photo",
+                  "type": "Byte[]",
+                  "physicalType": "BYTE_ARRAY"
+                },
+                "sink": {
+                  "name": "Photo",
+                  "physicalType": "binary"
+                }
+              },
+              {
+                "source": {
+                  "name": "ValidFrom",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "ValidFrom",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "ValidTo",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "ValidTo",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "LineageKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "LineageKey",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy_hqk",
+        "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "ParquetSource",
+            "storeSettings": {
+              "type": "AzureBlobStorageReadSettings",
+              "recursive": true,
+              "wildcardFolderPath": "WideWorldImportersDW/parquet/full/dimension_stock_item",
+              "wildcardFileName": "*.parquet"
+            },
+            "formatSettings": {
+              "type": "ParquetReadSettings"
+            },
+            "datasetSettings": {
+              "type": "Parquet",
+              "typeProperties": {
+                "location": {
+                  "type": "AzureBlobStorageLocation",
+                  "container": "sampledata"
+                },
+                "compressionCodec": "snappy"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "AzureBlobStorage",
+                  "typeProperties": {
+                    "authenticationType": "Anonymous",
+                    "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
+                  }
+                },
+                "name": "dimension_stock_item"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "sample",
+                "table": "dimension_stock_item"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "9db563d7-09c6-4ff5-8086-0ed117bdc02b",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                },
+                "name": "LH_Bronze"
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "StockItemKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "StockItemKey",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "WWIStockItemID",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "WWIStockItemID",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "StockItem",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "StockItem",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Color",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Color",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "SellingPackage",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "SellingPackage",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "BuyingPackage",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "BuyingPackage",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Brand",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Brand",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Size",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Size",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "LeadTimeDays",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "LeadTimeDays",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "QuantityPerOuter",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "QuantityPerOuter",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "IsChillerStock",
+                  "type": "Boolean",
+                  "physicalType": "BOOLEAN"
+                },
+                "sink": {
+                  "name": "IsChillerStock",
+                  "physicalType": "boolean"
+                }
+              },
+              {
+                "source": {
+                  "name": "Barcode",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Barcode",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "TaxRate",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 3,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "TaxRate",
+                  "physicalType": "decimal",
+                  "scale": 3,
+                  "precision": 18
+                }
+              },
+              {
+                "source": {
+                  "name": "UnitPrice",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 2,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "UnitPrice",
+                  "physicalType": "decimal",
+                  "scale": 2,
+                  "precision": 18
+                }
+              },
+              {
+                "source": {
+                  "name": "RecommendedRetailPrice",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 2,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "RecommendedRetailPrice",
+                  "physicalType": "decimal",
+                  "scale": 2,
+                  "precision": 18
+                }
+              },
+              {
+                "source": {
+                  "name": "TypicalWeightPerUnit",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 3,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "TypicalWeightPerUnit",
+                  "physicalType": "decimal",
+                  "scale": 3,
+                  "precision": 18
+                }
+              },
+              {
+                "source": {
+                  "name": "Photo",
+                  "type": "Byte[]",
+                  "physicalType": "BYTE_ARRAY"
+                },
+                "sink": {
+                  "name": "Photo",
+                  "physicalType": "binary"
+                }
+              },
+              {
+                "source": {
+                  "name": "ValidFrom",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "ValidFrom",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "ValidTo",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "ValidTo",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "LineageKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "LineageKey",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy_y5q",
+        "dependsOn": []
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "ParquetSource",
+            "storeSettings": {
+              "type": "AzureBlobStorageReadSettings",
+              "recursive": true,
+              "wildcardFolderPath": "WideWorldImportersDW/parquet/full/fact_sale",
+              "wildcardFileName": "*.parquet"
+            },
+            "formatSettings": {
+              "type": "ParquetReadSettings"
+            },
+            "datasetSettings": {
+              "type": "Parquet",
+              "typeProperties": {
+                "location": {
+                  "type": "AzureBlobStorageLocation",
+                  "container": "sampledata"
+                },
+                "compressionCodec": "snappy"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "AzureBlobStorage",
+                  "typeProperties": {
+                    "authenticationType": "Anonymous",
+                    "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
+                  }
+                },
+                "name": "fact_sale"
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "LakehouseTableSink",
+            "tableActionOption": "OverwriteSchema",
+            "partitionOption": "None",
+            "datasetSettings": {
+              "type": "LakehouseTable",
+              "typeProperties": {
+                "schema": "sample",
+                "table": "fact_sale"
+              },
+              "schema": [],
+              "linkedService": {
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "9db563d7-09c6-4ff5-8086-0ed117bdc02b",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Tables"
+                  },
+                  "annotations": []
+                },
+                "name": "LH_Bronze"
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "SaleKey",
+                  "type": "Int64",
+                  "physicalType": "INT64"
+                },
+                "sink": {
+                  "name": "SaleKey",
+                  "physicalType": "long"
+                }
+              },
+              {
+                "source": {
+                  "name": "CityKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "CityKey",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "CustomerKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "CustomerKey",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "BillToCustomerKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "BillToCustomerKey",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "StockItemKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "StockItemKey",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "InvoiceDateKey",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "InvoiceDateKey",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "DeliveryDateKey",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "DeliveryDateKey",
+                  "physicalType": "timestamp"
+                }
+              },
+              {
+                "source": {
+                  "name": "SalespersonKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "SalespersonKey",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "WWIInvoiceID",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "WWIInvoiceID",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "Description",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Description",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Package",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Package",
+                  "physicalType": "string"
+                }
+              },
+              {
+                "source": {
+                  "name": "Quantity",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "Quantity",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "UnitPrice",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 2,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "UnitPrice",
+                  "physicalType": "decimal",
+                  "scale": 2,
+                  "precision": 18
+                }
+              },
+              {
+                "source": {
+                  "name": "TaxRate",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 3,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "TaxRate",
+                  "physicalType": "decimal",
+                  "scale": 3,
+                  "precision": 18
+                }
+              },
+              {
+                "source": {
+                  "name": "TotalExcludingTax",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 2,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "TotalExcludingTax",
+                  "physicalType": "decimal",
+                  "scale": 2,
+                  "precision": 18
+                }
+              },
+              {
+                "source": {
+                  "name": "TaxAmount",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 2,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "TaxAmount",
+                  "physicalType": "decimal",
+                  "scale": 2,
+                  "precision": 18
+                }
+              },
+              {
+                "source": {
+                  "name": "Profit",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 2,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "Profit",
+                  "physicalType": "decimal",
+                  "scale": 2,
+                  "precision": 18
+                }
+              },
+              {
+                "source": {
+                  "name": "TotalIncludingTax",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 2,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "TotalIncludingTax",
+                  "physicalType": "decimal",
+                  "scale": 2,
+                  "precision": 18
+                }
+              },
+              {
+                "source": {
+                  "name": "TotalDryItems",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "TotalDryItems",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "TotalChillerItems",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "TotalChillerItems",
+                  "physicalType": "integer"
+                }
+              },
+              {
+                "source": {
+                  "name": "LineageKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "LineageKey",
+                  "physicalType": "integer"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy_ysg",
+        "dependsOn": []
+      }
+    ]
+  }
+}
