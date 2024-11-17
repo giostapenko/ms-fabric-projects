@@ -42,31 +42,38 @@ df.createOrReplaceTempView('tab_news')
 # CELL ********************
 
 # MAGIC %%sql
-# MAGIC -- contar a quantidade de publicações por dia
-# MAGIC WITH tab_news_published as (
-# MAGIC SELECT DISTINCT id,
-# MAGIC        CAST(published_at AS DATE) as published_at
+# MAGIC CREATE TABLE tab_news_ids_distinct as 
+# MAGIC SELECT DISTINCT *
 # MAGIC 
 # MAGIC FROM tab_news
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC WITH tab_news_published as (
+# MAGIC SELECT COUNT (id) AS count_publication,
+# MAGIC         CAST(published_at AS DATE) as published_at
+# MAGIC 
+# MAGIC FROM tab_news_ids_distinct
 # MAGIC 
 # MAGIC WHERE status = 'published' 
 # MAGIC AND type = 'content' 
 # MAGIC 
-# MAGIC ),
-# MAGIC tab_news_publication as (
-# MAGIC -- fazer a media de qtde de publicações / qtde de dias
-# MAGIC SELECT published_at,
-# MAGIC         COUNT(DISTINCT id) as count_publication
+# MAGIC GROUP BY published_at
+# MAGIC )
+# MAGIC 
+# MAGIC SELECT SUM(count_publication)/COUNT(DISTINCT published_at) as average_publication
 # MAGIC 
 # MAGIC FROM tab_news_published
 # MAGIC 
-# MAGIC GROUP BY published_at
-# MAGIC -- da pra fazer a diferença entre quantidade de publicações feitas em um mês / no mes anterior
-# MAGIC )
-# MAGIC 
-# MAGIC SELECT SUM(count_publication)/COUNT(*)
-# MAGIC 
-# MAGIC FROM tab_news_publication
+# MAGIC WHERE published_at > '2024-10-12'
 
 # METADATA ********************
 
@@ -83,10 +90,10 @@ df.createOrReplaceTempView('tab_news')
 
 # MAGIC %%sql
 # MAGIC WITH tab_news_sum_tabcoins as (
-# MAGIC SELECT DISTINCT owner_username as user,
-# MAGIC        SUM(tabcoins) sum_tabcoins 
+# MAGIC SELECT owner_username as user,
+# MAGIC        SUM(tabcoins) as sum_tabcoins 
 # MAGIC 
-# MAGIC FROM tab_news
+# MAGIC FROM tab_news_ids_distinct
 # MAGIC 
 # MAGIC WHERE status = 'published' AND type = 'content' 
 # MAGIC 
@@ -95,14 +102,12 @@ df.createOrReplaceTempView('tab_news')
 # MAGIC )
 # MAGIC 
 # MAGIC SELECT *,  
-# MAGIC         DENSE_RANK() OVER (ORDER BY sum_tabcoins) as rank
+# MAGIC         DENSE_RANK() OVER (ORDER BY sum_tabcoins DESC) as rank
 # MAGIC 
 # MAGIC FROM tab_news_sum_tabcoins
 # MAGIC 
 # MAGIC GROUP BY user,
 # MAGIC         sum_tabcoins
-# MAGIC 
-# MAGIC ORDER BY sum_tabcoins DESC
 # MAGIC 
 # MAGIC LIMIT 10
 

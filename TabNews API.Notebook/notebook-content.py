@@ -63,7 +63,7 @@ page = 1
 date_stop = pd.to_datetime('2024-10-18').date()
 while True:
     print(page)
-    resp = get_response(per_page=100, strategy="new")
+    resp = get_response(page=2, per_page=100, strategy="new")
 
     if resp.status_code == 200:
         data = resp.json()  
