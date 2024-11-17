@@ -27,14 +27,14 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "nyc_taxi_green",
                 "properties": {
                   "type": "AzureBlobStorage",
                   "typeProperties": {
                     "authenticationType": "Anonymous",
                     "containerUri": "https://azureopendatastorage.blob.core.windows.net/nyctlc"
                   }
-                },
-                "name": "nyc_taxi_green"
+                }
               },
               "annotations": []
             }
@@ -51,6 +51,7 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "LH_Bronze",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -59,8 +60,7 @@
                     "rootFolder": "Tables"
                   },
                   "annotations": []
-                },
-                "name": "LH_Bronze"
+                }
               },
               "annotations": []
             }

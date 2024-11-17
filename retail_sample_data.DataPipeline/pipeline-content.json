@@ -26,14 +26,14 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "dimension_customer",
                 "properties": {
                   "type": "AzureBlobStorage",
                   "typeProperties": {
                     "authenticationType": "Anonymous",
                     "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
                   }
-                },
-                "name": "dimension_customer"
+                }
               },
               "annotations": []
             }
@@ -50,6 +50,7 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "LH_Bronze",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -58,8 +59,7 @@
                     "rootFolder": "Tables"
                   },
                   "annotations": []
-                },
-                "name": "LH_Bronze"
+                }
               },
               "annotations": []
             }
@@ -232,14 +232,14 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "dimension_city",
                 "properties": {
                   "type": "AzureBlobStorage",
                   "typeProperties": {
                     "authenticationType": "Anonymous",
                     "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
                   }
-                },
-                "name": "dimension_city"
+                }
               },
               "annotations": []
             }
@@ -256,6 +256,7 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "LH_Bronze",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -264,8 +265,7 @@
                     "rootFolder": "Tables"
                   },
                   "annotations": []
-                },
-                "name": "LH_Bronze"
+                }
               },
               "annotations": []
             }
@@ -471,14 +471,14 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "dimension_date",
                 "properties": {
                   "type": "AzureBlobStorage",
                   "typeProperties": {
                     "authenticationType": "Anonymous",
                     "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
                   }
-                },
-                "name": "dimension_date"
+                }
               },
               "annotations": []
             }
@@ -495,6 +495,7 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "LH_Bronze",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -503,8 +504,7 @@
                     "rootFolder": "Tables"
                   },
                   "annotations": []
-                },
-                "name": "LH_Bronze"
+                }
               },
               "annotations": []
             }
@@ -710,14 +710,14 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "dimension_employee",
                 "properties": {
                   "type": "AzureBlobStorage",
                   "typeProperties": {
                     "authenticationType": "Anonymous",
                     "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
                   }
-                },
-                "name": "dimension_employee"
+                }
               },
               "annotations": []
             }
@@ -734,6 +734,7 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "LH_Bronze",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -742,8 +743,7 @@
                     "rootFolder": "Tables"
                   },
                   "annotations": []
-                },
-                "name": "LH_Bronze"
+                }
               },
               "annotations": []
             }
@@ -894,14 +894,14 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "dimension_stock_item",
                 "properties": {
                   "type": "AzureBlobStorage",
                   "typeProperties": {
                     "authenticationType": "Anonymous",
                     "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
                   }
-                },
-                "name": "dimension_stock_item"
+                }
               },
               "annotations": []
             }
@@ -918,6 +918,7 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "LH_Bronze",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -926,8 +927,7 @@
                     "rootFolder": "Tables"
                   },
                   "annotations": []
-                },
-                "name": "LH_Bronze"
+                }
               },
               "annotations": []
             }
@@ -1215,14 +1215,14 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "fact_sale",
                 "properties": {
                   "type": "AzureBlobStorage",
                   "typeProperties": {
                     "authenticationType": "Anonymous",
                     "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
                   }
-                },
-                "name": "fact_sale"
+                }
               },
               "annotations": []
             }
@@ -1239,6 +1239,7 @@
               },
               "schema": [],
               "linkedService": {
+                "name": "LH_Bronze",
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
@@ -1247,8 +1248,7 @@
                     "rootFolder": "Tables"
                   },
                   "annotations": []
-                },
-                "name": "LH_Bronze"
+                }
               },
               "annotations": []
             }
