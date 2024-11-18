@@ -34,70 +34,6 @@ print (requisicao.json())
 
 # MARKDOWN ********************
 
-# # **Production Table**
-
-# CELL ********************
-
-import datetime
-import requests
-import pandas as pd
-import json
-
-def get_response(dim1, dim2, dim3, lang):
-    url = f"https://www.ine.pt/ine/json_indicador/pindica.jsp?op=2&varcd=0000021&Dim1=S7A{dim1}&Dim2={dim2}&Dim3={dim3}&lang={lang}"
-    response = requests.get(url)
-    return response
-
-def save_data(data, option='json'):
-
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H_%M_%S_%f")
-
-    json_dir = "/lakehouse/default/Files/data/ine_data/json/production/"
-    parquet_dir = "/lakehouse/default/Files/data/ine_data/parquet/production/"
-
-    if option == 'parquet':
-        df = pd.DataFrame(data)
-        df.to_parquet(f"{parquet_dir}{now}_{dim1}.parquet",index=False)
-
-    elif option == 'json':
-        with open(f"{json_dir}{now}_{dim1}.json",'w') as open_file:
-            
-            json.dump(data, open_file, indent=4)
-
-dim1_years = [f"{year}" for year in range(1986, 2023)]
-dim2_location = [f"{number}" for number in range(1, 9)]
-dim3_species = [f"{number}" for number in range(101, 106)]
-lang = "EN"
-
-data = []
-
-for dim1 in dim1_years:
-    for dim2 in dim2_location:
-        for dim3 in dim3_species:
-            response = get_response(dim1, dim2, dim3, lang)
-            
-            if response.status_code == 200:
-                data = response.json()
-                save_data(data)
-
-            else:
-                print(response.status_code)
-
-if data:
-    save_data(data)
-else:
-    print("no data")
-
-
-# METADATA ********************
-
-# META {
-# META   "language": "python",
-# META   "language_group": "synapse_pyspark"
-# META }
-
-# MARKDOWN ********************
-
 # # Consumption Table - Meat
 
 # CELL ********************
@@ -128,7 +64,7 @@ def save_data(data, option='json'):
             
             json.dump(data, open_file, indent=4)
 
-dim1_years = [f"{year}" for year in range(1981, 2023)]
+dim1_years = [f"{year}" for year in range(2003, 2025)]
 dim3_species = [f"{number}" for number in [41, 411, 412, 413, 414, 415, 416, 420]]
 
 data = []
@@ -148,6 +84,18 @@ if data:
     save_data(data)
 else:
     print("no data")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+df = spark.sql("SELECT * FROM LH_Bronze.dbo.tb_meat_consumption LIMIT 1000")
+display(df)
 
 # METADATA ********************
 
@@ -188,7 +136,7 @@ def save_data(data, option='json'):
             
             json.dump(data, open_file, indent=4)
 
-dim1_years = [f"{year}" for year in range(1983, 2023)]
+dim1_years = [f"{year}" for year in range(2003, 2025)]
 
 data = []
 
@@ -206,6 +154,18 @@ if data:
     save_data(data)
 else:
     print("no data")
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+df = spark.sql("SELECT * FROM LH_Bronze.dbo.tb_ine_egg_consumption LIMIT 1000")
+display(df)
 
 # METADATA ********************
 
@@ -552,7 +512,7 @@ def save_data(data, option='json'):
             
             json.dump(data, open_file, indent=4)
 
-dim1_years = [f"{year}" for year in range (1983, 2021)]
+dim1_years = [f"{year}" for year in range (2003, 2025)]
 
 data = []
 
@@ -610,7 +570,7 @@ def save_data(data, option='json'):
             
             json.dump(data, open_file, indent=4)
 
-dim1_years = [f"{year}" for year in range (2003, 2021)]
+dim1_years = [f"{year}" for year in range (2003, 2025)]
 
 data = []
 
@@ -668,7 +628,7 @@ def save_data(data, option='json'):
             
             json.dump(data, open_file, indent=4)
 
-dim1_years = [f"{year}" for year in range (2003, 2023)]
+dim1_years = [f"{year}" for year in range (2003, 2025)]
 
 data = []
 
@@ -726,7 +686,7 @@ def save_data(data, option='json'):
             
             json.dump(data, open_file, indent=4)
 
-dim1_years = [f"{year}" for year in range (2003, 2023)]
+dim1_years = [f"{year}" for year in range (2003, 2025)]
 
 data = []
 

@@ -35,7 +35,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, explode, lit
 
 # Define the list of years dynamically
-years = [f"{year}" for year in range (1983, 2023)]
+years = [f"{year}" for year in range (2003, 2024)]
 
 # Explode each year in `dados` if it exists and union them into one DataFrame
 exploded_dfs = []
@@ -84,6 +84,22 @@ final_df.createOrReplaceTempView("tb_ine_egg_production")
 # MAGIC %%sql
 # MAGIC CREATE TABLE tb_egg_production AS
 # MAGIC SELECT *
+# MAGIC 
+# MAGIC FROM tb_ine_egg_production
+
+# METADATA ********************
+
+# META {
+# META   "language": "sparksql",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+# MAGIC %%sql
+# MAGIC INSERT INTO tb_egg_production
+# MAGIC 
+# MAGIC SELECT DISTINCT *
 # MAGIC 
 # MAGIC FROM tb_ine_egg_production
 
